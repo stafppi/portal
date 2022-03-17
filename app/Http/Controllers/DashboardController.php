@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\KaryawanModel;
 use App\DosenModel;
 
+
 class DashboardController extends Controller
 {
     public function index()
