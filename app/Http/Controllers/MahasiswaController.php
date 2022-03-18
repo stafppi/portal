@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\MahasiswaModel;
 
 class MahasiswaController extends Controller
 {
@@ -13,7 +14,8 @@ class MahasiswaController extends Controller
             'judul' => 'Master Data',
             'subjudul' => 'Mahasiswa'
         ];
-        return view('mahasiswa.index', compact('data'));
+        $mahasiswas = MahasiswaModel::orderBy('created_at', 'desc')->get();
+        return view('mahasiswa.index', compact('data', 'mahasiswas'));
     }
 
     
