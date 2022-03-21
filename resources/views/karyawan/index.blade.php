@@ -20,7 +20,7 @@
                   </div>
               @endif
 
-              <a href="/restore-karyawan"><i class="fa fa-trash">Trash</i></a>
+              <a href="{{ route('karyawan.restore') }}"><i class="fa fa-trash">Trash</i></a>
               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-lg">
                   <i class="fa fa-user"></i> Add
                 </button>
@@ -48,8 +48,8 @@
                         <td>{{ $karyawan->no_telepon }}</td>
                         <td>{{ $karyawan->alamat }}</td>
                         <td>
-                          <a title="Lihat Detil" href="/detil-karyawan/{{ $karyawan->id }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                          <a title="Hapus" href="/delete-karyawan/{{ $karyawan->id }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
+                          <a title="Lihat Detil" href="{{ route('karyawan.detil', $karyawan->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                          <a title="Hapus" href="{{ route('karyawan.delete.soft', $karyawan->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endif
@@ -79,7 +79,7 @@
                 <!-- general form elements -->
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form action="/add-karyawan" method="POST">
+                  <form action="{{ route('karyawan.add') }}" method="POST">
                     @csrf
                     <div class="card-body">
                       <div class="form-group">

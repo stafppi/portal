@@ -17,17 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard.view');
 
 //======== MODULE KARYAWAN =========//
-Route::get('/karyawan', 'KaryawanController@index');
-Route::post('/add-karyawan', 'KaryawanController@addKaryawanAksi');
-Route::get('/detil-karyawan/{id}', 'KaryawanController@detilKaryawan');
-Route::post('/edit-karyawan/{id}', 'KaryawanController@editKaryawanAksi');
-Route::get('/restore-karyawan', 'KaryawanController@indexRestore');
-Route::get('/restore-kry/{id}', 'KaryawanController@restore');
-Route::get('/delete-karyawan/{id}', 'KaryawanController@softDelete');
-Route::get('/delete-kry/{id}', 'KaryawanController@delete');
+Route::prefix('karyawan')->group(function(){
+
+    Route::get('/view', 'KaryawanController@index')->name('karyawan.view');
+    Route::post('/add', 'KaryawanController@addKaryawanAksi')->name('karyawan.add');
+    Route::get('/detil/{id}', 'KaryawanController@detilKaryawan')->name('karyawan.detil');
+    Route::post('/edit/{id}', 'KaryawanController@editKaryawanAksi')->name('karyawan.edit');
+    Route::get('/restore', 'KaryawanController@indexRestore')->name('karyawan.restore');
+    Route::get('/restore-kry/{id}', 'KaryawanController@restore')->name('karyawan.back');
+    Route::get('/delete/{id}', 'KaryawanController@softDelete')->name('karyawan.delete.soft');
+    Route::get('/delete-kry/{id}', 'KaryawanController@delete')->name('karyawan.delete');
+
+});
 //========= END KARYAWAN ===========//
 
 //========== MODULE MAHASISWA =========//
@@ -36,18 +40,21 @@ Route::get('/mahasiswa', 'MahasiswaController@index');
 //========== END MAHASISWA ============//
 
 //========== MODULE DOSEN ==============//
-Route::get('/dosen', 'DosenController@index');
-Route::post('/add-dosen', 'DosenController@addDosenAksi');
-Route::get('/detil-dosen/{id}', 'DosenController@detilDosen');
-Route::post('/edit-dosen/{id}', 'DosenController@editDosenAksi');
-Route::get('/restore-dosen', 'DosenController@indexRestore');
-Route::get('/restore-dsn/{id}', 'DosenController@restore');
-Route::get('/delete-dosen/{id}', 'DosenController@softDelete');
-Route::get('/delete-dsn/{id}', 'DosenController@delete');
+Route::prefix('dosen')->group(function(){
 
-Route::get('/jabatan', 'DosenController@jabatan');
-Route::get('/dosen-pembimbing', 'DosenController@dosenPembimbing');
+    Route::get('/view', 'DosenController@index')->name('dosen.view');
+    Route::post('/add', 'DosenController@addDosenAksi')->name('dosen.add');
+    Route::get('/detil/{id}', 'DosenController@detilDosen')->name('dosen.detil');
+    Route::post('/edit/{id}', 'DosenController@editDosenAksi')->name('dosen.edit');
+    Route::get('/restore', 'DosenController@indexRestore')->name('dosen.restore');
+    Route::get('/restore-dsn/{id}', 'DosenController@restore')->name('dosen.back');
+    Route::get('/delete-dosen/{id}', 'DosenController@softDelete')->name('dosen.delete.soft');
+    Route::get('/delete-dsn/{id}', 'DosenController@delete')->name('dosen.delete');
 
+    Route::get('/jabatan', 'DosenController@jabatan');
+    Route::get('/dosen-pembimbing', 'DosenController@dosenPembimbing');
+
+});
 //========= END DOSEN ==================//
 
 Route::get('/all-information', 'PusatInformationController@index');

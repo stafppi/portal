@@ -210,13 +210,21 @@
         </div>
       </div> -->
 
+@php 
+
+$prefix = Request::route()->getPrefix();
+$route = Route::current()->getName();
+
+
+@endphp
+
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="/dashboard" class="nav-link active">
+            <a href="/dashboard" class="nav-link {{ ($route == 'dashboard.view')? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -379,25 +387,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori Pembayaran</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pembayaran Masuk Pindahan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Biaya Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pembayaran Kelulusan</p>
                 </a>
@@ -442,16 +450,16 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="" class="nav-link {{ ($prefix == '/karyawan')? 'active' : '' }}">
               <i class="nav-icon far fa-edit"></i>
               <p>
                 Master Data
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/karyawan" class="nav-link">
+            <ul class="nav nav-treeview {{ ($prefix == '/karyawan')? 'active' : '' }}">
+              <li class="nav-item {{ ($prefix == '/karyawan')? 'active' : '' }}">
+                <a href="{{ route('karyawan.view') }}" class="nav-link {{ ($prefix == '/karyawan')? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Karyawan</p>
                 </a>
@@ -472,7 +480,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/dosen" class="nav-link">
+                    <a href="{{ route('dosen.view') }}" class="nav-link {{ ($prefix == '/dosen')? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Dosen</p>
                     </a>

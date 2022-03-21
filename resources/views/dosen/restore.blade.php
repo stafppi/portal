@@ -8,7 +8,7 @@
             <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="/dosen" class="btn btn-warning"><i class="fa fa-caret-left"> Kembali</i></a>
+                <a href="{{ route('dosen.view') }}" class="btn btn-warning"><i class="fa fa-caret-left"> Kembali</i></a>
               
                 @if(Session::has('message'))
                     <div class="alert alert-success">
@@ -46,9 +46,9 @@
                         <td>{{ $dosen->no_telepon }}</td>
                         <td>{{ $dosen->alamat }}</td>
                         <td>
-                          <a title="Lihat Detil" href="/detil-dosen/{{ $dosen->id }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                          <a title="Restore" href="/restore-dsn/{{ $dosen->id }}" class="btn btn-sm btn-primary" onclick="return confirm('Data Akan Dikembalikan?')"><i class="fa fa-random"></i></a>
-                          <a title="Hapus Permanen" href="/delete-dsn/{{ $dosen->id }}" class="btn btn-sm btn-danger" onclick="return confirm('Data Akan Dihapus Secara Permanen?')"><i class="fa fa-trash"></i></a>
+                          <a title="Lihat Detil" href="{{ route('dosen.detil', $dosen->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                          <a title="Restore" href="{{ route('dosen.back', $dosen->id) }}" class="btn btn-sm btn-primary" onclick="return confirm('Data Akan Dikembalikan?')"><i class="fa fa-random"></i></a>
+                          <a title="Hapus Permanen" href="{{ route('dosen.delete', $dosen->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Data Akan Dihapus Secara Permanen?')"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endif

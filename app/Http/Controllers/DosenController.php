@@ -40,7 +40,7 @@ class DosenController extends Controller
             'updated_at' => date('y-m-d')
         ]);
 
-        return redirect('/dosen')->with('message', 'Data Dosen Berhasil ditambahkan!');
+        return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil ditambahkan!');
     }
 
     public function detilDosen($id)
@@ -71,7 +71,7 @@ class DosenController extends Controller
 
         //dd($data);
 
-        return redirect('/dosen')->with('message', 'Data Dosen Berhasil diupdate!');
+        return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil diupdate!');
     }
 
     public function softDelete($id)
@@ -80,7 +80,7 @@ class DosenController extends Controller
             'hapus' => 0
         ]);
 
-        return redirect('/dosen')->with('delete', 'Data Dosen Berhasil dihapus!');
+        return redirect()->route('dosen.view')->with('delete', 'Data Dosen Berhasil dihapus!');
     }
 
     public function indexRestore()
@@ -100,7 +100,7 @@ class DosenController extends Controller
             'hapus' => 1
         ]);
 
-        return redirect('/dosen')->with('message', 'Data Dosen Berhasil dikambalikan!');
+        return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil dikambalikan!');
     }
 
     public function delete($id)
@@ -108,7 +108,7 @@ class DosenController extends Controller
         $dosen = DosenModel::findOrFail($id);
         $dosen->delete();
 
-        return redirect('/restore-dosen')->with('delete', 'Data Berhasil Dihapus!');
+        return redirect()->route('dosen.restore')->with('delete', 'Data Berhasil Dihapus!');
     }
 
     public function jabatan()

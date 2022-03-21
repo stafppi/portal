@@ -120,11 +120,11 @@
                     </tbody>
                 </table>
                 <!-- /.post -->
-                <a href="/dosen" class="btn btn-warning">Kembali</a>
+                <a href="{{ route('dosen.view') }}" class="btn btn-warning">Kembali</a>
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="timeline">
-                <form class="form-horizontal" method="post" action="/edit-dosen/{{$dosen->id}}">
+                <form class="form-horizontal" method="post" action="{{ route('dosen.edit', $dosen->id) }}">
                     @csrf
                     <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Name</label>

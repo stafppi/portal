@@ -39,7 +39,7 @@ class KaryawanController extends Controller
             'updated_at' => date('y-m-d')
         ]);
 
-        return redirect('/karyawan')->with('message', 'Data Karyawan Berhasil ditambahkan!');
+        return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil ditambahkan!');
     }
 
     public function detilKaryawan($id)
@@ -69,7 +69,7 @@ class KaryawanController extends Controller
 
         //dd($data);
 
-        return redirect('/karyawan')->with('message', 'Data Karyawan Berhasil diupdate!');
+        return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil diupdate!');
     }
 
     public function softDelete(Request $request, $id)
@@ -78,7 +78,7 @@ class KaryawanController extends Controller
             'delete' => 0
         ]);
 
-        return redirect('/karyawan')->with('delete', 'Data Karywan Berhasil Dihapus!');
+        return redirect()->route('karyawan.view')->with('delete', 'Data Karywan Berhasil Dihapus!');
     }
 
     public function indexRestore()
@@ -98,7 +98,7 @@ class KaryawanController extends Controller
             'delete' => 1
         ]);
 
-        return redirect('/karyawan')->with('message', 'Data Karyawan Berhasil diRestore');
+        return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil diRestore');
     }
 
     public function delete($id)
@@ -106,7 +106,7 @@ class KaryawanController extends Controller
         $karyawan = KaryawanModel::findOrFail($id);
         $karyawan->delete();
 
-        return redirect('/restore-karyawan')->with('delete', 'Data Berhasil Dihapus!');
+        return redirect()->route('karyawan.restore')->with('delete', 'Data Berhasil Dihapus!');
     }
 
 
