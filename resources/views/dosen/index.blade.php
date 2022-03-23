@@ -49,7 +49,7 @@
                         <td>{{ $dosen->alamat }}</td>
                         <td>
                           <a title="Lihat Detil" href="{{ route('dosen.detil', $dosen->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                          <a title="Hapus" href="{{ route('dosen.delete.soft', $dosen->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
+                          <a title="Hapus" href="{{ route('dosen.delete.soft', $dosen->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endif

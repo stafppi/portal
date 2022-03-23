@@ -39,6 +39,7 @@ class DosenController extends Controller
             'hapus' => 1,
             'updated_at' => date('y-m-d')
         ]);
+        
 
         return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil ditambahkan!');
     }
