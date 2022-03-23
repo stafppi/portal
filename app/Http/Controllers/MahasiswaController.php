@@ -18,5 +18,17 @@ class MahasiswaController extends Controller
         return view('mahasiswa.index', compact('data', 'mahasiswas'));
     }
 
+    public function detilMahasiswa($id)
+    {
+        $data = [
+            'title' => 'Page Mahasiswa | Portal PPI',
+            'judul' => 'Master Data',
+            'subjudul' => 'Detil Mahasiswa',
+        ];
+        $mahasiswa = MahasiswaModel::find($id);
+        //dd($karyawan);
+        return view('mahasiswa.detil', compact('data', 'mahasiswa'));
+    }
+
     
 }

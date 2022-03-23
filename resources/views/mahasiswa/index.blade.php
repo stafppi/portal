@@ -48,8 +48,8 @@
                         <td>{{ $mahasiswa->no_telepon }}</td>
                         <td>{{ $mahasiswa->alamat }}</td>
                         <td>
-                          <a title="Lihat Detil" href="/detil-mahasiswa/{{ $mahasiswa->id }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                          <a title="Hapus" href="/delete-mahasiswa/{{ $mahasiswa->id }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
+                          <a title="Lihat Detil" href="{{ route('mahasiswa.detil', $mahasiswa->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                          <a title="Hapus" href="" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endif

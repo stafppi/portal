@@ -38,7 +38,7 @@ Route::prefix('karyawan')->group(function(){
 Route::prefix('mahasiswa')->group(function(){
 
     Route::get('/view', 'MahasiswaController@index')->name('mahasiswa.view');
-    Route::get('/mahasiswa', 'MahasiswaController@index');
+    Route::get('/detil/{id}', 'MahasiswaController@detilMahasiswa')->name('mahasiswa.detil');
     
 });
 //========== END MAHASISWA ============//
