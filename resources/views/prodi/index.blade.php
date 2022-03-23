@@ -30,26 +30,26 @@
                   <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nama</th>
-                        <th>Jenis Kelamin</th>
-                        <th>No Telepon/WA</th>
-                        <th>Alamat</th>
+                        <th>Kode Prodi</th>
+                        <th>Prodi</th>
+                        <th>Jenjang</th>
+                        <th>Akreditasi</th>
                         <th width="100px;">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                     @php($i = 1)
-                    @foreach($dosens as $dosen)
-                    @if($dosen->hapus == 1)
+                    @foreach($prodis as $prodi)
+                    @if($prodi->is_delete == 1)
                     <tr>
                         <td>{{ $i++ }}</td>
-                        <td>{{ $dosen->nama }}</td>
-                        <td>{{ $dosen->jenis_kelamin }}</td>
-                        <td>{{ $dosen->no_telepon }}</td>
-                        <td>{{ $dosen->alamat }}</td>
+                        <td>{{ $prodi->kode_prodi }}</td>
+                        <td>{{ $prodi->prodi }}</td>
+                        <td>{{ $prodi->jenjang }}</td>
+                        <td>{{ $prodi->akreditasi }}</td>
                         <td>
-                          <a title="Lihat Detil" href="{{ route('dosen.detil', $dosen->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                          <a title="Hapus" href="{{ route('dosen.delete.soft', $dosen->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
+                          <a title="Lihat Detil" href="{{ route('prodi.detil', $prodi->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                          <a title="Hapus" href="{{ route('prodi.delete.soft', $prodi->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin Data Akan dihapus?')"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endif
@@ -70,7 +70,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Form Tambah Dosen</h4>
+              <h4 class="modal-title">Form Tambah Prodi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

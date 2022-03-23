@@ -35,8 +35,12 @@ Route::prefix('karyawan')->group(function(){
 //========= END KARYAWAN ===========//
 
 //========== MODULE MAHASISWA =========//
-Route::get('/mahasiswa', 'MahasiswaController@index');
-Route::get('/mahasiswa', 'MahasiswaController@index');
+Route::prefix('mahasiswa')->group(function(){
+
+    Route::get('/view', 'MahasiswaController@index')->name('mahasiswa.view');
+    Route::get('/mahasiswa', 'MahasiswaController@index');
+    
+});
 //========== END MAHASISWA ============//
 
 //========== MODULE DOSEN ==============//
@@ -56,6 +60,17 @@ Route::prefix('dosen')->group(function(){
 
 });
 //========= END DOSEN ==================//
+
+//========== MODULE PRODI ==============//
+Route::prefix('prodi')->group(function(){
+
+    Route::get('/view', 'ProdiController@index')->name('prodi.view');
+    Route::get('/add', 'ProdiController@index')->name('prodi.add');
+    Route::get('/detil/{id}', 'ProdiController@index')->name('prodi.detil');
+    Route::get('/delete-dosen/{id}', 'ProdiController@index')->name('prodi.delete.soft');
+
+});
+//========= END PRODI ==================//
 
 Route::get('/all-information', 'PusatInformationController@index');
 Route::get('/information-mhs', 'PusatInformationController@mahasiswa');

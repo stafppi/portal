@@ -465,7 +465,7 @@ $route = Route::current()->getName();
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/mahasiswa" class="nav-link">
+                <a href="{{ route('mahasiswa.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Mahasiswa</p>
                 </a>
@@ -512,7 +512,7 @@ $route = Route::current()->getName();
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/500.html" class="nav-link">
+                <a href="{{ route('prodi.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Prodi</p>
                 </a>
