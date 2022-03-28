@@ -8,8 +8,14 @@ use App\DosenModel;
 use App\MahasiswaModel;
 
 
+
 class DashboardController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+    
     public function index()
     {
         $data = [
@@ -23,7 +29,7 @@ class DashboardController extends Controller
         $all_mahasiswa = MahasiswaModel::count();
         //dd($all_karyawan);
         //$title = 'Page Dashboard | Portal PPI';
-        return view('dashboard', compact('data', 'all_karyawan', 'all_dosen', 'all_mahasiswa'));
+        return view('admin.dashboard', compact('data', 'all_karyawan', 'all_dosen', 'all_mahasiswa'));
     }
     
 }

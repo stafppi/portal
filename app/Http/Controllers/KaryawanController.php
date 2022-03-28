@@ -16,7 +16,7 @@ class KaryawanController extends Controller
         ];
         $karyawans = KaryawanModel::orderBy('created_at', 'desc')->get();
         //Product::orderBy('created_at','desc')->get();
-        return view('karyawan.index', compact('data', 'karyawans'));
+        return view('admin.master_data.karyawan.index', compact('data', 'karyawans'));
     }
 
     public function addKaryawanAksi(Request $request)
@@ -51,7 +51,7 @@ class KaryawanController extends Controller
         ];
         $karyawan = KaryawanModel::find($id);
         //dd($karyawan);
-        return view('karyawan.detil', compact('data', 'karyawan'));
+        return view('admin.master_data.karyawan.detil', compact('data', 'karyawan'));
     }
 
     public function editKaryawanAksi(Request $request, $id)
@@ -89,7 +89,7 @@ class KaryawanController extends Controller
             'subjudul' => 'Restore Data Karyawan',
         ];
         $karyawans = KaryawanModel::all();
-        return view('karyawan.restore', compact('data', 'karyawans'));
+        return view('admin.master_data.karyawan.restore', compact('data', 'karyawans'));
     }
 
     public function restore(Request $request, $id)

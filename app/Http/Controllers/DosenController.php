@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DosenModel;
+use App\M_DosenJabatan;
+use App\ProdiModel;
 
 class DosenController extends Controller
 {
@@ -16,7 +18,9 @@ class DosenController extends Controller
         ];
 
         $dosens = DosenModel::orderBy('created_at', 'desc')->get();
-        return view('dosen.index', compact('data', 'dosens'));
+        $jabatans = M_DosenJabatan::all();
+        $prodis = ProdiModel::all();
+        return view('admin.master_data.dosen.index', compact('data', 'dosens','jabatans','prodis'));
     }
 
     public function addDosenAksi(Request $request)
@@ -29,14 +33,9 @@ class DosenController extends Controller
 
         DosenModel::create([
             'nama' => $request->nama,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'agama' => $request->agama,
-            'email' => $request->email,
-            'no_telepon' => $request->no_telepon,
-            'alamat' => $request->alamat,
-            'hapus' => 1,
+            'nip' => $request->nip,
+            'id_dosen_jabatan' => $request->id_dosen_jabatan,
+            'id_prodi' => $request->id_prodi,
             'updated_at' => date('y-m-d')
         ]);
         
@@ -53,7 +52,7 @@ class DosenController extends Controller
         ];
         $dosen = DosenModel::find($id);
         //dd($karyawan);
-        return view('dosen.detil', compact('data', 'dosen'));
+        return view('admin.master_data.dosen.detil', compact('data', 'dosen'));
     }
 
     public function editDosenAksi(Request $request, $id)
@@ -92,7 +91,7 @@ class DosenController extends Controller
             'subjudul' => 'Restore Data Dosen',
         ];
         $dosens = DosenModel::all();
-        return view('dosen.restore', compact('data', 'dosens'));
+        return view('admin.master_data.dosen.restore', compact('data', 'dosens'));
     }
 
     public function restore($id)
@@ -112,6 +111,9 @@ class DosenController extends Controller
         return redirect()->route('dosen.restore')->with('delete', 'Data Berhasil Dihapus!');
     }
 
+
+
+//SEGEMENT DOSEN JABATAN
     public function jabatan()
     {
         $data = [
@@ -119,9 +121,83 @@ class DosenController extends Controller
             'judul' => 'Master Data',
             'subjudul' => 'Jabatan Dosen'
         ];
-        return view('dosen.jabatan', compact('data'));
+
+        $jabatans = M_DosenJabatan::orderBy('created_at', 'desc')->get();
+
+        return view('admin.master_data.dosen.jabatan', compact('data', 'jabatans'));
     }
 
+    public function jabatanAdd(Request $request)
+    {
+        $jabatan = new M_DosenJabatan();
+        $jabatan->jabatan = $request->jabatan;
+        $jabatan->tunjangan_jabatan = $request->tunjangan_jabatan;
+        $jabatan->tunjangan_sks = $request->tunjangan_sks;
+        $jabatan->jumlah_komulatif_maksimal = $jabatan->tunjangan_jabatan + $jabatan->tunjangan_sks;
+        $jabatan->save();
+
+        return redirect()->route('jabatan.dosen.view')->with('message', 'Data Jabatan Berhasil dikambalikan!');
+
+    }
+
+    public function jabatanEdit($id)
+    {
+        $data = [
+            'title' => 'Page Dosen Jabatan | Portal PPI',
+            'judul' => 'Master Data',
+            'subjudul' => 'Edit Jabatan Dosen'
+        ];
+
+        $jabatan = M_DosenJabatan::find($id);
+        
+        return view('admin.master_data.dosen.jabatan_edit', compact('data', 'jabatan'));
+    }
+
+    public function jabatanUpdate(Request $request, $id)
+    {
+        $jabatan = M_DosenJabatan::find($id);
+        $jabatan->jabatan = $request->jabatan;
+        $jabatan->tunjangan_jabatan = $request->tunjangan_jabatan;
+        $jabatan->tunjangan_sks = $request->tunjangan_sks;
+        $jabatan->jumlah_komulatif_maksimal = $jabatan->tunjangan_jabatan + $jabatan->tunjangan_sks;
+        $jabatan->save();
+
+        return redirect()->route('jabatan.dosen.view')->with('message', 'Data Jabatan Berhasil Diupdate!');
+    }
+
+    public function isDelete($id)
+    {
+        M_DosenJabatan::where('id', $id)->update([
+            'is_delete' => 0
+        ]);
+
+        return redirect()->route('jabatan.dosen.view')->with('delete', 'Data Jabatan Berhasil dihapus!');
+    }
+
+    public function jabatanIndexRestore()
+    {
+        $data = [
+            'title' => 'Page Dosen Jabatan | Portal PPI',
+            'judul' => 'Master Data',
+            'subjudul' => 'Trash Jabatan Dosen'
+        ];
+
+        $jabatans = M_DosenJabatan::all();
+        
+        return view('admin.master_data.dosen.jabatan_restore', compact('data', 'jabatans'));
+    }
+
+    public function jabatanDelete($id)
+    {
+        $jabatan = M_DosenJabatan::findOrFail($id);
+        $jabatan->delete();
+
+        return redirect()->route('jabatan.restore.view')->with('delete', 'Data Berhasil Dihapus!');
+    }
+
+
+
+//SEGEMENT DOSEN PEMBIMBING
     public function dosenPembimbing()
     {
         $data = [
@@ -129,6 +205,6 @@ class DosenController extends Controller
             'judul' => 'Master Data',
             'subjudul' => 'Dosen Pembimbing'
         ];
-        return view('dosen.dosen-pembimbing', compact('data'));
+        return view('admin.master_data.dosen.dosen-pembimbing', compact('data'));
     }
 }
