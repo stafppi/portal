@@ -11,6 +11,7 @@ class DosenController extends Controller
 {
     public function index()
     {
+        
         $data = [
             'title' => 'Page Dosen | Portal PPI',
             'judul' => 'Master Data',

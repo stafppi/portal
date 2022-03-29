@@ -44,7 +44,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ ($prefix == '/bak')? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 BAK
@@ -54,7 +54,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{ route('jadwal.kuliah') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jadwal Kuliah</p>
                 </a>

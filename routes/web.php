@@ -23,6 +23,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.view');
 
+Route::prefix('bak')->group(function(){
+
+    Route::get('/jadwal/kuliah', 'JadwalKuliahController@index')->name('jadwal.kuliah');
+
+});
+
+
+
 //======== MODULE MASTER DATA =========//
 
 Route::prefix('master-data')->group(function(){
