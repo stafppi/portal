@@ -349,57 +349,34 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/all-information" class="nav-link">
+                <a href="{{ route('pendaftar.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Seluruh Informasi</p>
+                  <p>Pendaftaran</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="pages/mailbox/compose.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mahasiswa</p>
+                  <p>Nilai</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="pages/mailbox/read-mail.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dosen</p>
+                  <p>Kelulusan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                <a href="pages/mailbox/read-mail.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Staff</p>
+                  <p>Laporan Pendaftar Maba</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="pages/mailbox/read-mail.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Tiket
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
+                  <p>Laporan Biaya Maba</p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/examples/login.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tiket Masuk</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/examples/register.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tiket Keluar</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/examples/forgot-password.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Draft</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </li>

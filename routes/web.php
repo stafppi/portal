@@ -115,6 +115,14 @@ Route::prefix('master-data')->group(function(){
 });
 
 
+//======== MODULE MAHASISWA BARU =========//
+
+Route::prefix('resepsionis')->group(function(){
+
+    Route::get('/pendaftar/view', 'PendaftarMahasiswaController@index')->name('pendaftar.view');
+
+});
+
 
 Route::get('/all-information', 'PusatInformationController@index');
 Route::get('/information-mhs', 'PusatInformationController@mahasiswa');

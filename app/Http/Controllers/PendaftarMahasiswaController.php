@@ -8,29 +8,28 @@ use App\ProdiModel;
 use App\Semester;
 use App\Jenjang;
 
-class MahasiswaController extends Controller
+class PendaftarMahasiswaController extends Controller
 {
-
-
     public function index()
     {
         $data = [
-            'title' => 'Page Mahasiswa | Portal PPI',
-            'judul' => 'Master Data',
-            'subjudul' => 'Mahasiswa'
+            'title' => 'Page Calon Mahasiswa | Portal PPI',
+            'judul' => 'Resepsionis',
+            'subjudul' => 'Pendaftar Mahasiswa'
         ];
-        $mahasiswas= MahasiswaModel::orderBy ('created_at','desc')->get();
+
+        $mahasiswas= MahasiswaModel::orderBy('created_at','desc')->get();
         $prodis = ProdiModel::all();
         $semesters = Semester::all();
         $jenjang = Jenjang::all();
         //dd($mahasiswas);
-        return view('admin.master_data.mahasiswa.index', compact('data','mahasiswas','prodis','semesters','jenjang'));
+        return view('admin.resepsionis.pendaftar_mahasiswa.index', compact('data','mahasiswas','prodis','semesters','jenjang'));
     }
 
-    public function addMahasiswaAksi (Request $request)
+    public function addMahasiswaAksi(Request $request)
     {
         MahasiswaModel::create([
-            'nim' => $request->nim,
+           //'nim' => $request->nim,
             'nama' => $request->nama,
             'id_prodi' => $request->id_prodi,
             'id_jenjang' => $request->id_jenjang,
