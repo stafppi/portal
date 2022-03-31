@@ -26,6 +26,9 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard.view');
 Route::prefix('bak')->group(function(){
 
     Route::get('/jadwal/kuliah', 'JadwalKuliahController@index')->name('jadwal.kuliah');
+    Route::post('/jadwal/kuliah/add', 'JadwalKuliahController@jadwalKuliahAdd')->name('jadwal.kuliah.add');
+    Route::get('/jadwal/kuliah/edit/{id}', 'JadwalKuliahController@jadwalKuliahEdit')->name('jadwal.kuliah.edit');
+    Route::post('/jadwal/kuliah/update/{id}', 'JadwalKuliahController@jadwalKuliahUpdate')->name('jadwal.kuliah.update');
 
 });
 

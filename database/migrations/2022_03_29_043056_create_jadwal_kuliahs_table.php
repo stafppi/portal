@@ -20,7 +20,7 @@ class CreateJadwalKuliahsTable extends Migration
             $table->bigInteger('id_semester');
             $table->bigInteger('id_dosen');
             $table->bigInteger('id_ruang');
-            $table->bigInteger('hari');
+            $table->varchar('hari');
             $table->timestamps();
         });
     }
