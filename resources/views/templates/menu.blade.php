@@ -35,7 +35,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="/dashboard" class="nav-link {{ ($route == 'dashboard.view')? 'active' : '' }}">
+            <a href="{{ route('dashboard.view') }}" class="nav-link {{ ($route == 'dashboard.view')? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -457,10 +457,10 @@
           </li>
 
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="{{ route('tahun.akademik.view') }}" class="nav-link {{ ($route == 'tahun.akademik.view')? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Tahun Ajaran
+                Tahun Akademik
               </p>
             </a>
           </li>

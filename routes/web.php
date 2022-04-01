@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.view');
 
+Route::get('/tahun-akademik/view', 'TahunAkademikController@index')->name('tahun.akademik.view');
+Route::get('/tahun-akademik/add', 'TahunAkademikController@tahunAkademikAdd')->name('tahun.akademik.add');
+
 Route::prefix('bak')->group(function(){
 
     Route::get('/jadwal/kuliah', 'JadwalKuliahController@index')->name('jadwal.kuliah');
@@ -120,6 +123,14 @@ Route::prefix('master-data')->group(function(){
 Route::prefix('resepsionis')->group(function(){
 
     Route::get('/pendaftar/view', 'PendaftarMahasiswaController@index')->name('pendaftar.view');
+    Route::post('/pendaftar/add', 'PendaftarMahasiswaController@pendaftarAdd')->name('pendaftar.add');
+    Route::get('/pendaftar/detil/{id}', 'PendaftarMahasiswaController@pendaftarDetil')->name('pendaftar.detil');
+    Route::post('/pendaftar/edit/{id}', 'PendaftarMahasiswaController@pendaftarEdit')->name('pendaftar.edit');
+    Route::get('/pendaftar/delete-s/{id}', 'PendaftarMahasiswaController@softDelete')->name('pendaftar.delete.soft');
+    Route::get('/pendaftar/restore', 'PendaftarMahasiswaController@indexRestoreCalonMhs')->name('pendaftar.restore');
+    Route::get('/pendaftar/restore/back/{id}', 'PendaftarMahasiswaController@restoreBack')->name('pendaftar.back');
+    Route::get('/pendaftar/migrate/{id}', 'PendaftarMahasiswaController@mhsMigrate')->name('mahasiswa.migrate');
+    Route::get('/pendaftar/delete/{id}', 'PendaftarMahasiswaController@delete')->name('mahasiswa.delete');
 
 });
 

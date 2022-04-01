@@ -15,7 +15,7 @@ class PendaftarMahasiswaController extends Controller
         $data = [
             'title' => 'Page Calon Mahasiswa | Portal PPI',
             'judul' => 'Resepsionis',
-            'subjudul' => 'Pendaftar Mahasiswa'
+            'subjudul' => 'Pendaftar Mahasiswa Baru'
         ];
 
         $mahasiswas= MahasiswaModel::orderBy('created_at','desc')->get();
@@ -26,7 +26,7 @@ class PendaftarMahasiswaController extends Controller
         return view('admin.resepsionis.pendaftar_mahasiswa.index', compact('data','mahasiswas','prodis','semesters','jenjang'));
     }
 
-    public function addMahasiswaAksi(Request $request)
+    public function pendaftarAdd(Request $request)
     {
         MahasiswaModel::create([
            //'nim' => $request->nim,
@@ -37,23 +37,23 @@ class PendaftarMahasiswaController extends Controller
             'updated_at' => date('y-m-d')
         ]);
 
-        return redirect()->route('mahasiswa.view')->with('message', 'Data Mahasiswa Berhasil ditambahkan!');
+        return redirect()->route('pendaftar.view')->with('message', 'Data Mahasiswa Berhasil ditambahkan!');
     }
 
 
-    public function detilMahasiswa($id)
+    public function pendaftarDetil($id)
     {
         $data = [
-            'title' => 'Page Mahasiswa | Portal PPI',
-            'judul' => 'Master Data',
-            'subjudul' => 'Detil Mahasiswa',
+            'title' => 'Page Pendafat | Portal PPI',
+            'judul' => 'Resepsionis',
+            'subjudul' => 'Detil Calon Mahasiswa Baru',
         ];
         $mahasiswa = MahasiswaModel::find($id);
         //dd($karyawan);
-        return view('admin.master_data.mahasiswa.detil', compact('data', 'mahasiswa'));
+        return view('admin.resepsionis.pendaftar_mahasiswa.pendaftar_detil', compact('data', 'mahasiswa'));
     }
 
-    public function editMahasiswaAksi(Request $request, $id)
+    public function pendaftarEdit(Request $request, $id)
     {
         MahasiswaModel::where('id', $id)->update([
             //'nim' => $request->nim,
@@ -70,7 +70,7 @@ class PendaftarMahasiswaController extends Controller
 
         //dd($data);
 
-        return redirect()->route('mahasiswa.view')->with('message', 'Data mahasiswa Berhasil diupdate!');
+        return redirect()->route('pendaftar.view')->with('message', 'Data Calon Mahasiswa Berhasil diupdate!');
     }
 
     public function softDelete($id)
@@ -79,27 +79,27 @@ class PendaftarMahasiswaController extends Controller
             'is_delete' => 0
         ]);
 
-        return redirect()->route('mahasiswa.view')->with('delete', 'Data mahasiswa Berhasil dihapus!');
+        return redirect()->route('pendaftar.view')->with('delete', 'Data mahasiswa Berhasil dihapus!');
     }
 
-    public function indexRestore()
+    public function indexRestoreCalonMhs()
     {
         $data = [
             'title' => 'Page Mahasiswa | Portal PPI',
-            'judul' => 'Master Data',
-            'subjudul' => 'Restore Data Mahasiswa',
+            'judul' => 'Resepsionis',
+            'subjudul' => 'Restore Data Calon Mahasiswa Baru',
         ];
         $mahasiswas = MahasiswaModel::all();
-        return view('admin.master_data.mahasiswa.restore', compact('data', 'mahasiswas'));
+        return view('admin.resepsionis.pendaftar_mahasiswa.restore_index', compact('data', 'mahasiswas'));
     }
 
-    public function restoreMhs($id)
+    public function restoreBack($id)
     {
         MahasiswaModel::where('id', $id)->update([
             'is_delete' => 1
         ]);
 
-        return redirect()->route('mahasiswa.view')->with('message', 'Data mahasiswa Berhasil dikambalikan!');
+        return redirect()->route('pendaftar.view')->with('message', 'Data Calon Mahasiswa Berhasil dikambalikan!');
     }
 
     public function delete($id)
@@ -107,14 +107,18 @@ class PendaftarMahasiswaController extends Controller
         $mahasiswa = MahasiswaModel::findOrFail($id);
         $mahasiswa->delete();
 
-        return redirect()->route('mahasiswa.restore')->with('delete', 'Data Berhasil Dihapus!');
+        return redirect()->route('pendaftar.restore')->with('delete', 'Data Berhasil Dihapus!');
     }
 
 
-//MAHASISWA PENDAFTAR (Calon Mahasiswa)
-    public function daftarMahasiswa()
+
+    public function mhsMigrate($id)
     {
-        
+        MahasiswaModel::where('id', $id)->update([
+            'mhs_status' => 'Aktif',
+        ]);
+
+        return redirect()->route('pendaftar.view')->with('message', 'Data Mahasiswa Berhasil Termigrasi!');
     }
 
     

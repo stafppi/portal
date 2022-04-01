@@ -30,27 +30,26 @@
                   <thead>
                     <tr>
                         <th>#</th>
-                        <th>Prodi</th>
-                        <th>Nama</th>
-                        <th>No Telepon/WA</th>
-                        <th>E-Mail</th>
+                        <th>Tahun Akademik</th>
+                        <th>Semester</th>
+                        <th>Keterangan</th>
+                        <th>Status</th>
                         <th width="100px;">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                   @php($i = 1)
-                    @foreach($mahasiswas as $mahasiswa)
-                    @if($mahasiswa->is_delete == 1 && $mahasiswa->mhs_status == 'Calon')
+                    @foreach($tahun_akademiks as $ta)
+                    @if($ta->is_delete == 1)
                     <tr>
                       <td>{{ $i++ }}</td>
-                      <td>{{ $mahasiswa['prodi_model']['nama_prodi'] }}</td>
-                      <td>{{ $mahasiswa->nama }}</td>
-                      <td>{{ $mahasiswa->no_telepon }}</td>
-                      <td>{{ $mahasiswa->email }}</td>
+                      <td>{{ $ta->tahun_akademik }}</td>
+                      <td>{{ $ta->semester }}</td>
+                      <td>{{ $ta->status }}</td>
+                      <td></td>
                       <td>
-                        <a title="Lihat Detil" href="{{ route('pendaftar.detil', $mahasiswa->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                        <a title="Send" href="{{ route('mahasiswa.migrate', $mahasiswa->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
-                        <a title="Hapus" href="{{ route('pendaftar.delete.soft', $mahasiswa->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
+                        <a title="Edit" href="{{ route('mahasiswa.migrate', $ta->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                        <a title="Hapus" href="{{ route('pendaftar.delete.soft', $ta->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
                     @endif
@@ -67,7 +66,7 @@
 </div>
 
 <!-- modal -->
-      <div class="modal fade" id="modal-lg">
+<div class="modal fade" id="modal-lg">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -81,37 +80,39 @@
                 <!-- general form elements -->
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form action="{{route('pendaftar.add')}}" method="POST">
+                  <form action="{{route('tahun.akademik.add')}}" method="POST">
                     @csrf
                     <div class="card-body">
                       <!-- <div class="form-group">
                         <label for="nim">NIM</label>
                         <input type="text" class="form-control" id="nim" name="nim" placeholder="Input NIM">
                       </div> -->
-                      <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama">
-                      </div>
 
                       <div class="form-group">
-                        <label for="id_prodi"></label>
-                        <select class="form-control" name="id_prodi" id="id_prodi">
-                          <option value="Null">-- Pilih Prodi --</option>
-                          @foreach($prodis as $prodi)
-                          <option value="{{ $prodi->id }}"> {{ $prodi->nama_prodi }} </option>
-                          @endforeach
+                        <label for="tahun_akademik">Tahun Akademik</label>
+                        <select class="form-control" name="tahun_akademik" id="tahun_akademik">
+                          <option value="Null">-- Pilih Tahun Akademik --</option>
+                          <option value="2021/2022"> 2021/2022 </option>
+                          <option value="2022/2023"> 2022/2023 </option>
+                          <option value="2023/2024"> 2023/2024 </option>
+                          <option value="2024/2025"> 2024/2025 </option>
+                          <option value="2025/2026"> 2025/2026 </option>
+                          <option value="2026/2027"> 2026/2027 </option>
+                          <option value="2027/2028"> 2027/2028 </option>
+                          <option value="2028/2029"> 2028/2029 </option>
+                          <option value="2029/2030"> 2029/2030 </option>
                         </select>
                       </div>
 
                       <div class="form-group">
-                        <label for="id_jenjang"></label>
-                        <select class="form-control" name="id_jenjang" id="id_jenjang">
-                          <option value="Null">-- Pilih Jenjang --</option>
-                          @foreach($jenjang as $row)
-                          <option value="{{ $row->id }}"> {{ $row->nama_jenjang }} </option>
-                          @endforeach
+                        <label for="semester_ta">Semester</label>
+                        <select class="form-control" name="semester_ta" id="semester_ta">
+                          <option value="Null">-- Pilih Semester --</option>
+                          <option value="Ganjil"> Ganjil </option>
+                          <option value="Genap"> Genap </option>
                         </select>
                       </div>
+
 
                       
 

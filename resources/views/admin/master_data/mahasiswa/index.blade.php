@@ -41,7 +41,7 @@
                   <tbody>
                   @php($i = 1)
                     @foreach($mahasiswas as $mahasiswa)
-                    @if($mahasiswa->is_delete == 1)
+                    @if($mahasiswa->is_delete == 1 && $mahasiswa->mhs_status == 'Aktif')
                     <tr>
                       <td>{{ $i++ }}</td>
                       <td>{{ $mahasiswa['prodi_model']['nama_prodi'] }}</td>
