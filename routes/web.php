@@ -23,8 +23,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.view');
 
-Route::get('/tahun-akademik/view', 'TahunAkademikController@index')->name('tahun.akademik.view');
-Route::get('/tahun-akademik/add', 'TahunAkademikController@tahunAkademikAdd')->name('tahun.akademik.add');
+
+
+Route::prefix('tahun-akademik')->group(function(){
+
+    Route::get('/view', 'TahunAkademikController@index')->name('tahun.akademik.view');
+    Route::post('/add', 'TahunAkademikController@tahunAkademikAdd')->name('tahun.akademik.add');
+    Route::get('/edit/{id}', 'TahunAkademikController@tahunAkademikEdit')->name('tahun.akademik.edit');
+    Route::post('/update/{id}', 'TahunAkademikController@tahunAkademikUpdate')->name('tahun.akademik.update');
+    Route::get('/delete/soft/{id}', 'TahunAkademikController@deleteSoft')->name('ta.delete.soft');
+    Route::get('/trash', 'TahunAkademikController@indexRestore')->name('tahun.akademik.trash');
+    Route::get('/restore/{id}', 'TahunAkademikController@taRestore')->name('tahun.akademik.restore');
+    Route::get('/delete/ta/{id}', 'TahunAkademikController@delete')->name('ta.delete');
+
+});
 
 Route::prefix('bak')->group(function(){
 

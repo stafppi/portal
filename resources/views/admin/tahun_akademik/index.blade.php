@@ -20,7 +20,7 @@
                   </div>
               @endif
 
-              <a href="{{route('pendaftar.restore')}}"><i class="fa fa-trash">Trash</i></a>
+              <a href="{{route('tahun.akademik.trash')}}"><i class="fa fa-trash">Trash</i></a>
               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-lg">
                   <i class="fa fa-user"></i> Add
                 </button>
@@ -44,12 +44,20 @@
                     <tr>
                       <td>{{ $i++ }}</td>
                       <td>{{ $ta->tahun_akademik }}</td>
-                      <td>{{ $ta->semester }}</td>
-                      <td>{{ $ta->status }}</td>
-                      <td></td>
+                      <td>{{ $ta->semester_ta }}</td>
+                      <td>{{ $ta->keterangan }}</td>
                       <td>
-                        <a title="Edit" href="{{ route('mahasiswa.migrate', $ta->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                        <a title="Hapus" href="{{ route('pendaftar.delete.soft', $ta->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
+                        <?php 
+                          if($ta->status == 1){
+                            echo "Aktif";
+                          }else{
+                            echo "Tidak-Aktif";
+                          }
+                        ?>
+                      </td>
+                      <td>
+                        <a title="Edit" href="{{ route('tahun.akademik.edit', $ta->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                        <a title="Hapus" href="{{ route('ta.delete.soft', $ta->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
                     @endif
