@@ -27,21 +27,32 @@ class DosenController extends Controller
     public function addDosenAksi(Request $request)
     {
         //VALIDATION DATA RESPONSE
-        // $validatedData = $request->validate([
-        //     'nama' => 'required|unique:posts|max:100',
-        //     'body' => 'required',
-        // ]);
-
-        DosenModel::create([
-            'nama' => $request->nama,
-            'nip' => $request->nip,
-            'id_dosen_jabatan' => $request->id_dosen_jabatan,
-            'id_prodi' => $request->id_prodi,
-            'updated_at' => date('y-m-d')
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'nip' => 'required',
+            'id_dosen_jabatan' => 'required',
+            'id_prodi' => 'required',
         ]);
+
+        if($validatedData){
+
+            DosenModel::create([
+                'nama' => $request->nama,
+                'nip' => $request->nip,
+                'id_dosen_jabatan' => $request->id_dosen_jabatan,
+                'id_prodi' => $request->id_prodi,
+                'updated_at' => date('y-m-d')
+            ]);
+
+            return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil ditambahkan!');
+            
+        }else{
+
+            return redirect()->route('dosen.view')->with('delete', 'Data Dosen Gagal ditambahkan!');
+
+        }
         
 
-        return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil ditambahkan!');
     }
 
     public function detilDosen($id)
@@ -58,21 +69,38 @@ class DosenController extends Controller
 
     public function editDosenAksi(Request $request, $id)
     {
-        DosenModel::where('id', $id)->update([
-            'nama' => $request->nama,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'agama' => $request->agama,
-            'email' => $request->email,
-            'no_telepon' => $request->no_telepon,
-            'alamat' => $request->alamat,
-            'updated_at' => date('y-m-d')
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'email' => 'required',
+            'no_telepon' => 'required',
+            'alamat' => 'required',
         ]);
+
+        if($validatedData){
+
+            DosenModel::where('id', $id)->update([
+                'nama' => $request->nama,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'agama' => $request->agama,
+                'email' => $request->email,
+                'no_telepon' => $request->no_telepon,
+                'alamat' => $request->alamat,
+                'updated_at' => date('y-m-d')
+            ]);
+            return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil diupdate!');
+        }else{
+            return redirect()->route('dosen.view')->with('delete', 'Data Dosen Gagal diupdate!');
+        }
 
         //dd($data);
 
-        return redirect()->route('dosen.view')->with('message', 'Data Dosen Berhasil diupdate!');
     }
 
     public function softDelete($id)
@@ -130,14 +158,27 @@ class DosenController extends Controller
 
     public function jabatanAdd(Request $request)
     {
-        $jabatan = new M_DosenJabatan();
-        $jabatan->jabatan = $request->jabatan;
-        $jabatan->tunjangan_jabatan = $request->tunjangan_jabatan;
-        $jabatan->tunjangan_sks = $request->tunjangan_sks;
-        $jabatan->jumlah_komulatif_maksimal = $jabatan->tunjangan_jabatan + $jabatan->tunjangan_sks;
-        $jabatan->save();
+        $validatedData = $request->validate([
+            'jabatan' => 'required',
+            'tunjangan_jabatan' => 'required',
+            'tunjangan_sks' => 'required',
+            'jumlah_komulatif_maksimal' => 'required',
+        ]);
 
-        return redirect()->route('jabatan.dosen.view')->with('message', 'Data Jabatan Berhasil dikambalikan!');
+        if($validatedData){
+
+            $jabatan = new M_DosenJabatan();
+            $jabatan->jabatan = $request->jabatan;
+            $jabatan->tunjangan_jabatan = $request->tunjangan_jabatan;
+            $jabatan->tunjangan_sks = $request->tunjangan_sks;
+            $jabatan->jumlah_komulatif_maksimal = $jabatan->tunjangan_jabatan + $jabatan->tunjangan_sks;
+            $jabatan->save();
+
+            return redirect()->route('jabatan.dosen.view')->with('message', 'Data Jabatan Berhasil Disimpan!');
+        }else{
+            return redirect()->route('jabatan.dosen.view')->with('delete', 'Data Jabatan Gagal Disimpan!');
+        }
+
 
     }
 
@@ -156,14 +197,26 @@ class DosenController extends Controller
 
     public function jabatanUpdate(Request $request, $id)
     {
-        $jabatan = M_DosenJabatan::find($id);
-        $jabatan->jabatan = $request->jabatan;
-        $jabatan->tunjangan_jabatan = $request->tunjangan_jabatan;
-        $jabatan->tunjangan_sks = $request->tunjangan_sks;
-        $jabatan->jumlah_komulatif_maksimal = $jabatan->tunjangan_jabatan + $jabatan->tunjangan_sks;
-        $jabatan->save();
+        $validatedData = $request->validate([
+            'jabatan' => 'required',
+            'tunjangan_jabatan' => 'required',
+            'tunjangan_sks' => 'required',
+            'jumlah_komulatif_maksimal' => 'required',
+        ]);
 
-        return redirect()->route('jabatan.dosen.view')->with('message', 'Data Jabatan Berhasil Diupdate!');
+        if($validatedData){
+            $jabatan = M_DosenJabatan::find($id);
+            $jabatan->jabatan = $request->jabatan;
+            $jabatan->tunjangan_jabatan = $request->tunjangan_jabatan;
+            $jabatan->tunjangan_sks = $request->tunjangan_sks;
+            $jabatan->jumlah_komulatif_maksimal = $jabatan->tunjangan_jabatan + $jabatan->tunjangan_sks;
+            $jabatan->save();
+
+            return redirect()->route('jabatan.dosen.view')->with('message', 'Data Jabatan Berhasil Diupdate!');
+        }else{
+            return redirect()->route('jabatan.dosen.view')->with('delete', 'Data Jabatan Gagal Diupdate!');
+        }
+
     }
 
     public function isDelete($id)

@@ -20,7 +20,7 @@
                   </div>
               @endif
 
-              <a href="{{ route('dosen.restore') }}"><i class="fa fa-trash">Trash</i></a>
+              <a href="{{ route('jadwal.kuliah.trash') }}"><i class="fa fa-trash">Trash</i></a>
               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-lg">
                   <i class="fa fa-user"></i> Add
                 </button>
@@ -46,7 +46,7 @@
                   @if($jadwal->is_delete == 1)
                     <tr>
                         <td>{{ $i++ }}</td>
-                        <td></td>
+                        <td>{{ $jadwal['thn_akademik']['tahun_akademik'] }} - {{ $jadwal['thn_akademik']['semester_ta'] }}</td>
                         <td>{{ $jadwal['jadwal_kuliah']['nama_prodi'] }}</td>
                         <td>{{ $jadwal['SemesterModel']['semester'] }}</td>
                         <td>{{ $jadwal['DosenModel']['nama'] }}</td>
@@ -54,7 +54,7 @@
                         <td>{{ $jadwal->hari }} - {{ $jadwal->jam_masuk }}</td>
                         <td>
                           <a title="Lihat Detil" href="{{ route('jadwal.kuliah.edit', $jadwal->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                          <a title="Hapus" href="" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
+                          <a title="Hapus" href="{{ route('jadwal.kuliah.soft.delete', $jadwal->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                   @endif
@@ -88,6 +88,16 @@
                   <form action="{{ route('jadwal.kuliah.add') }}" method="POST">
                     @csrf
                     <div class="card-body">
+
+                      <div class="form-group">
+                        <label for="id_tahun_akademik">Program Studi</label>
+                        <select class="form-control" name="id_tahun_akademik" id="id_tahun_akademik">
+                          <option value="Null">-- Pilih Tahun Akademik --</option>
+                          @foreach($ta as $row)
+                          <option value="{{ $row->id }}"> {{ $row->tahun_akademik }} | {{ $row->semester_ta }} </option>
+                          @endforeach
+                        </select>
+                      </div>
 
                       <div class="form-group">
                         <label for="id_prodi">Program Studi</label>

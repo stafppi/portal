@@ -22,12 +22,23 @@ class RuangController extends Controller
 
     public function addRuangAksi(Request $request)
     {
-        $data = new RuangModel();
-        $data->kode_ruang = $request->kd_ruang;
-        $data->nama_ruang = $request->nama_ruang;
-        $data->save();
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'kd_ruang' => 'required',
+            'nama_ruang' => 'required',
+        ]);
 
-        return redirect()->route('ruang.view')->with('massage', 'Data Ruang Berhasil Ditambahkan');
+        if($validatedData){
+            $data = new RuangModel();
+            $data->kode_ruang = $request->kd_ruang;
+            $data->nama_ruang = $request->nama_ruang;
+            $data->save();
+
+            return redirect()->route('ruang.view')->with('massage', 'Data Ruang Berhasil Ditambahkan');
+        }else{
+            return redirect()->route('ruang.view')->with('delete', 'Data Ruang Gagal Ditambahkan');
+        }
+
     }
 
     public function detilRuang($id)
@@ -43,12 +54,23 @@ class RuangController extends Controller
 
     public function editRuangAksi(Request $request, $id)
     {
-        RuangModel::where('id', $id)->update([
-        'kode_ruang' => $request->kode_ruang,
-        'nama_ruang' => $request->nama_ruang,
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'kode_ruang' => 'required',
+            'nama_ruang' => 'required',
         ]);
+
+        if($validatedData){
+            RuangModel::where('id', $id)->update([
+            'kode_ruang' => $request->kode_ruang,
+            'nama_ruang' => $request->nama_ruang,
+            ]);
+
+            return redirect()->route('ruang.view')->with('message', 'Data Ruang Berhasil DiUpdate!');
+        }else{
+            return redirect()->route('ruang.view')->with('delete', 'Data Ruang Gagal DiUpdate!');
+        }
         
-        return redirect()->route('ruang.view')->with('message', 'Data Ruang Berhasil DiUpdate!');
     }
 
     public function softDelete($id)

@@ -22,24 +22,34 @@ class KaryawanController extends Controller
     public function addKaryawanAksi(Request $request)
     {
         //VALIDATION DATA RESPONSE
-        // $validatedData = $request->validate([
-        //     'nama' => 'required|unique:posts|max:100',
-        //     'body' => 'required',
-        // ]);
-
-        KaryawanModel::create([
-            'nama' => $request->nama,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'agama' => $request->agama,
-            'no_telepon' => $request->no_telepon,
-            'alamat' => $request->alamat,
-            'delete' => 1,
-            'updated_at' => date('y-m-d')
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'no_telepon' => 'required',
+            'alamat' => 'required',
         ]);
 
-        return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil ditambahkan!');
+        if($validatedData){
+            KaryawanModel::create([
+                'nama' => $request->nama,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'agama' => $request->agama,
+                'no_telepon' => $request->no_telepon,
+                'alamat' => $request->alamat,
+                'delete' => 1,
+                'updated_at' => date('y-m-d')
+            ]);
+
+            return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil ditambahkan!');
+        }else{
+            return redirect()->route('karyawan.view')->with('delete', 'Data Karyawan Gagal ditambahkan!');
+        }
+
     }
 
     public function detilKaryawan($id)
@@ -56,20 +66,36 @@ class KaryawanController extends Controller
 
     public function editKaryawanAksi(Request $request, $id)
     {
-        KaryawanModel::where('id', $id)->update([
-            'nama' => $request->nama,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'agama' => $request->agama,
-            'no_telepon' => $request->no_telepon,
-            'alamat' => $request->alamat,
-            'updated_at' => date('y-m-d')
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'no_telepon' => 'required',
+            'alamat' => 'required',
         ]);
 
-        //dd($data);
+        if($validatedData){
+            KaryawanModel::where('id', $id)->update([
+                'nama' => $request->nama,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'agama' => $request->agama,
+                'no_telepon' => $request->no_telepon,
+                'alamat' => $request->alamat,
+                'updated_at' => date('y-m-d')
+            ]);
 
-        return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil diupdate!');
+            return redirect()->route('karyawan.view')->with('message', 'Data Karyawan Berhasil diupdate!');
+        }else{
+            return redirect()->route('karyawan.view')->with('delete', 'Data Karyawan Gagal diupdate!');
+        }
+
+       
+
     }
 
     public function softDelete(Request $request, $id)

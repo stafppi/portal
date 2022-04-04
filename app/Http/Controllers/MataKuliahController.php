@@ -22,14 +22,24 @@ class MataKuliahController extends Controller
 
     public function addmatakuliahAksi (Request $request)
     {
-        MataKuliahModel::create([
-        'kode_matakuliah' => $request->kode_matakuliah,
-        'nama_matakuliah' => $request->nama_matakuliah,
-        'sks' => $request->sks,
-
-
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'kode_matakuliah' => 'required',
+            'nama_matakuliah' => 'required',
+            'sks' => 'required',
         ]);
-        return redirect()->route('matakuliah.view')->with('massage', 'Data MataKuliah Berhasil Ditambahkan');
+
+        if($validatedData){
+            MataKuliahModel::create([
+            'kode_matakuliah' => $request->kode_matakuliah,
+            'nama_matakuliah' => $request->nama_matakuliah,
+            'sks' => $request->sks,
+            ]);
+
+            return redirect()->route('matakuliah.view')->with('massage', 'Data MataKuliah Berhasil Ditambahkan');
+        }else{
+            return redirect()->route('matakuliah.view')->with('delete', 'Data MataKuliah Gagal Ditambahkan');
+        }
     }
 
     public function detilMataKuliah($id)
@@ -45,14 +55,24 @@ class MataKuliahController extends Controller
 
     public function editMataKuliahAKsi(Request $request, $id)
     {
-        MataKuliahModel::where('id', $id)->update([
-        'kode_matakuliah' => $request->kode_matakuliah,
-        'nama_matakuliah' => $request->nama_matakuliah,
-        'sks' => $request->sks,
-    
-
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'kode_matakuliah' => 'required',
+            'nama_matakuliah' => 'required',
+            'sks' => 'required',
         ]);
-        return redirect()->route('matakuliah.view')->with('message', 'Data MataKuliah Berhasil DiUpdate!');
+
+        if($validatedData){
+            MataKuliahModel::where('id', $id)->update([
+            'kode_matakuliah' => $request->kode_matakuliah,
+            'nama_matakuliah' => $request->nama_matakuliah,
+            'sks' => $request->sks,
+            ]);
+
+            return redirect()->route('matakuliah.view')->with('message', 'Data MataKuliah Berhasil DiUpdate!');
+        }else{
+            return redirect()->route('matakuliah.view')->with('delete', 'Data MataKuliah Gagal DiUpdate!');
+        }
     }
 
     public function softDelete($id)

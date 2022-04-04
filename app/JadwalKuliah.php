@@ -9,6 +9,7 @@ class JadwalKuliah extends Model
     protected $table = 'jadwal_kuliah';
 
     protected $fillable = [
+        'id_tahun_akademik', 
         'id_prodi', 
         'id_semester', 
         'id_dosen', 
@@ -18,6 +19,11 @@ class JadwalKuliah extends Model
         'jam_keluar', 
         'is_delete',
     ];
+
+    public function thn_akademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'id_tahun_akademik', 'id');
+    }
 
     public function jadwal_kuliah()
     {

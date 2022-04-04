@@ -29,16 +29,30 @@ class MahasiswaController extends Controller
 
     public function addMahasiswaAksi (Request $request)
     {
-        MahasiswaModel::create([
-            'nim' => $request->nim,
-            'nama' => $request->nama,
-            'id_prodi' => $request->id_prodi,
-            'id_jenjang' => $request->id_jenjang,
-            'id_semester' => 1,
-            'updated_at' => date('y-m-d')
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'nim' => 'required',
+            'nama' => 'required',
+            'id_prodi' => 'required',
+            'id_jenjang' => 'required',
+            'id_semester' => 'required',
         ]);
 
-        return redirect()->route('mahasiswa.view')->with('message', 'Data Mahasiswa Berhasil ditambahkan!');
+        if($validatedData){
+            MahasiswaModel::create([
+                'nim' => $request->nim,
+                'nama' => $request->nama,
+                'id_prodi' => $request->id_prodi,
+                'id_jenjang' => $request->id_jenjang,
+                'id_semester' => 1,
+                'updated_at' => date('y-m-d')
+            ]);
+
+            return redirect()->route('mahasiswa.view')->with('message', 'Data Mahasiswa Berhasil ditambahkan!');
+        }else{
+            return redirect()->route('mahasiswa.view')->with('delete', 'Data Mahasiswa Gagal ditambahkan!');
+        }
+
     }
 
 
@@ -56,22 +70,38 @@ class MahasiswaController extends Controller
 
     public function editMahasiswaAksi(Request $request, $id)
     {
-        MahasiswaModel::where('id', $id)->update([
-            //'nim' => $request->nim,
-            'nama' => $request->nama,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'agama' => $request->agama,
-            'email' => $request->email,
-            'no_telepon' => $request->no_telepon,
-            'alamat' => $request->alamat,
-            'updated_at' => date('y-m-d')
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'email' => 'required',
+            'no_telepon' => 'required',
+            'alamat' => 'required',
         ]);
 
-        //dd($data);
+        if($validatedData){
+            MahasiswaModel::where('id', $id)->update([
+                //'nim' => $request->nim,
+                'nama' => $request->nama,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'agama' => $request->agama,
+                'email' => $request->email,
+                'no_telepon' => $request->no_telepon,
+                'alamat' => $request->alamat,
+                'updated_at' => date('y-m-d')
+            ]);
 
-        return redirect()->route('mahasiswa.view')->with('message', 'Data mahasiswa Berhasil diupdate!');
+            return redirect()->route('mahasiswa.view')->with('message', 'Data Mahasiswa Berhasil diupdate!');
+        }else{
+            return redirect()->route('mahasiswa.view')->with('delete', 'Data Mahasiswa Gagal diupdate!');
+        }
+
+
     }
 
     public function softDelete($id)

@@ -22,22 +22,35 @@ class TahunAkademikController extends Controller
 
     public function tahunAkademikAdd(Request $request)
     {
-        $data = new TahunAkademik();
-        // $semester = $data->semester_ta = $request->semester_ta;
-        // $ta = $data->tahun_akademik = $request->tahun_akademik;
-        // if($semester == 'Ganjil'){
-        //     $thn = $ta."10";
-        //  }else{
-        //      $thn = $ta."20";
-        //  }
-        //  dd($data);
-        $data->tahun_akademik = $request->tahun_akademik;
-        $data->semester_ta = $request->semester_ta;
-        $data->keterangan = "Tahun Ajaran ".$data->tahun_akademik." Semester ".$data->semester_ta;
-        $data->status = 1;
-        $data->save();
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'tahun_akademik' => 'required',
+            'semester_ta' => 'required',
+            'keterangan' => 'required',
+        ]);
 
-        return redirect()->route('tahun.akademik.view')->with('massage', 'Data Tahun Akademik Berhasil Ditambahkan');
+        if($validatedData){
+            $data = new TahunAkademik();
+            // $semester = $data->semester_ta = $request->semester_ta;
+            // $ta = $data->tahun_akademik = $request->tahun_akademik;
+            // if($semester == 'Ganjil'){
+            //     $thn = $ta."10";
+            //  }else{
+            //      $thn = $ta."20";
+            //  }
+            //  dd($data);
+            $data->tahun_akademik = $request->tahun_akademik;
+            $data->semester_ta = $request->semester_ta;
+            $data->keterangan = "Tahun Ajaran ".$data->tahun_akademik." Semester ".$data->semester_ta;
+            $data->status = 1;
+            $data->save();
+
+            return redirect()->route('tahun.akademik.view')->with('massage', 'Data Tahun Akademik Berhasil Ditambahkan');
+        }else{
+            return redirect()->route('tahun.akademik.view')->with('delete', 'Data Tahun Akademik Gagal Ditambahkan');
+        }
+
+
 
     }
 
@@ -55,14 +68,27 @@ class TahunAkademikController extends Controller
 
     public function tahunAkademikUpdate(Request $request, $id)
     {
-        $data = TahunAkademik::find($id);
-        $data->tahun_akademik = $request->tahun_akademik;
-        $data->semester_ta = $request->semester_ta;
-        $data->keterangan = "Tahun Ajaran ".$data->tahun_akademik." Semester ".$data->semester_ta;
-        $data->status = $request->status;
-        $data->save();
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'tahun_akademik' => 'required',
+            'semester_ta' => 'required',
+            'keterangan' => 'required',
+            'status' => 'required',
+        ]);
 
-        return redirect()->route('tahun.akademik.view')->with('massage', 'Data Tahun Akademik Berhasil Dupdate!');
+        if($validatedData){
+            $data = TahunAkademik::find($id);
+            $data->tahun_akademik = $request->tahun_akademik;
+            $data->semester_ta = $request->semester_ta;
+            $data->keterangan = "Tahun Ajaran ".$data->tahun_akademik." Semester ".$data->semester_ta;
+            $data->status = $request->status;
+            $data->save();
+
+            return redirect()->route('tahun.akademik.view')->with('massage', 'Data Tahun Akademik Berhasil Diupdate!');
+        }else{
+            return redirect()->route('tahun.akademik.view')->with('delete', 'Data Tahun Akademik Gagal Diupdate!');
+        }
+
     }
 
     public function deleteSoft($id)

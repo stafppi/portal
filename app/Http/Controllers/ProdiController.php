@@ -20,16 +20,28 @@ class ProdiController extends Controller
         return view('admin.master_data.prodi.index', compact('data', 'prodis'));      
     }
 
-    public function addProdiAksi (Request $request)
+    public function addProdiAksi(Request $request)
     {
-        ProdiModel::create([
-        'kode_prodi' => $request->kode_prodi,
-        'nama_prodi' => $request->nama_prodi,
-        'jenjang' => $request->jenjang,
-        'akreditasi' => $request->akreditasi,
-
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'kode_prodi' => 'required',
+            'nama_prodi' => 'required',
+            'jenjang' => 'required',
+            'akreditasi' => 'required',
         ]);
-        return redirect()->route('prodi.view')->with('massage', 'Data Prodi Berhasil Ditambahkan');
+
+        if($validatedData){
+            ProdiModel::create([
+            'kode_prodi' => $request->kode_prodi,
+            'nama_prodi' => $request->nama_prodi,
+            'jenjang' => $request->jenjang,
+            'akreditasi' => $request->akreditasi,
+            ]);
+
+            return redirect()->route('prodi.view')->with('massage', 'Data Prodi Berhasil Ditambahkan');
+        }else{
+            return redirect()->route('prodi.view')->with('delete', 'Data Prodi Gagal Ditambahkan');
+        }
     }
 
     public function detilProdi($id)
@@ -45,14 +57,25 @@ class ProdiController extends Controller
 
     public function editProdiAKsi(Request $request, $id)
     {
-         ProdiModel::where('id', $id)->update([
-        'kode_prodi' => $request->kode_prodi,
-        'nama_prodi' => $request->nama_prodi,
-        'jenjang' => $request->jenjang,
-        'akreditasi' => $request->akreditasi,
-
+        //VALIDATION DATA RESPONSE
+        $validatedData = $request->validate([
+            'kode_prodi' => 'required',
+            'nama_prodi' => 'required',
+            'jenjang' => 'required',
+            'akreditasi' => 'required',
         ]);
-        return redirect()->route('prodi.view')->with('message', 'Data Prodi Berhasil DiUpdate!');
+        
+        if($validatedData){
+            ProdiModel::where('id', $id)->update([
+               'kode_prodi' => $request->kode_prodi,
+               'nama_prodi' => $request->nama_prodi,
+               'jenjang' => $request->jenjang,
+               'akreditasi' => $request->akreditasi,
+           ]);
+           return redirect()->route('prodi.view')->with('message', 'Data Prodi Berhasil DiUpdate!');
+        }else{
+            return redirect()->route('prodi.view')->with('delete', 'Data Prodi Gagal DiUpdate!');
+        }
     }
 
     public function softDelete($id)

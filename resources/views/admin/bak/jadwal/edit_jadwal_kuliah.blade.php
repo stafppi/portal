@@ -33,7 +33,7 @@
                         <tr>
                             <td>Tahun Akademik</td>
                             <td align="center"> : </td>
-                            <td></td>
+                            <td>{{ $jadwalKuliah['thn_akademik']['tahun_akademik'] }} - {{ $jadwalKuliah['thn_akademik']['semester_ta'] }}</td>
                         </tr>
                         <tr>
                             <td>Prodi</td>
@@ -70,12 +70,15 @@
                 <div class="tab-pane" id="timeline">
                 <form class="form-horizontal" method="post" action="{{ route('jadwal.kuliah.update',$jadwalKuliah->id) }}">
                     @csrf
-                    <div class="form-group">
+
+                      
+
+                      <div class="form-group">
                         <label for="id_prodi">Program Studi</label>
                         <select class="form-control" name="id_prodi" id="id_prodi">
                           <option value="Null">-- Pilih Prodi --</option>
                           @foreach($prodis as $prodi)
-                          <option value="{{ $prodi->id }}" <?php echo ($jadwalKuliah->id_prodi == $prodi->id)? 'selected' : ''; ?> > {{ $prodi->nama_prodi }} </option>
+                          <option value="{{ $prodi->id }}" <?php echo ($jadwalKuliah->id_prodi == $prodi->id)? 'selected' : ''; ?> required=""> {{ $prodi->nama_prodi }} </option>
                           @endforeach
                         </select>
                       </div>
