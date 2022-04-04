@@ -33,7 +33,7 @@
                         <th>Prodi</th>
                         <th>Nama</th>
                         <th>No Telepon/WA</th>
-                        <th>E-Mail</th>
+                        <th>Tgl Daftar</th>
                         <th width="100px;">Aksi</th>
                     </tr>
                   </thead>
@@ -46,10 +46,10 @@
                       <td>{{ $mahasiswa['prodi_model']['nama_prodi'] }}</td>
                       <td>{{ $mahasiswa->nama }}</td>
                       <td>{{ $mahasiswa->no_telepon }}</td>
-                      <td>{{ $mahasiswa->email }}</td>
+                      <td>{{ $mahasiswa['ta']['tahun_akademik'] }} || {{ $mahasiswa['ta']['semester_ta'] }} || {{ $mahasiswa->created_at }}</td>
                       <td>
                         <a title="Lihat Detil" href="{{ route('pendaftar.detil', $mahasiswa->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                        <a title="Send" href="{{ route('mahasiswa.migrate', $mahasiswa->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                        <a title="Send" href="{{ route('mahasiswa.migrate', $mahasiswa->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-paper-plane"></i></a>
                         <a title="Hapus" href="{{ route('pendaftar.delete.soft', $mahasiswa->id) }}" class="btn btn-sm btn-danger" id="delete"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
@@ -91,6 +91,16 @@
                       <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="id_tahun_akademik"></label>
+                        <select class="form-control" name="id_tahun_akademik" id="id_tahun_akademik">
+                          <option value="Null">-- Pilih Tahun Akademik --</option>
+                          @foreach($ta as $row)
+                          <option value="{{ $row->id }}"> {{ $row->tahun_akademik }} | {{ $row->semester_ta }} </option>
+                          @endforeach
+                        </select>
                       </div>
 
                       <div class="form-group">

@@ -90,7 +90,7 @@
                     </tbody>
                 </table>
                 <!-- /.post -->
-                <a href="{{route('mahasiswa.view') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{route('pendaftar.view') }}" class="btn btn-warning">Kembali</a>
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="timeline">

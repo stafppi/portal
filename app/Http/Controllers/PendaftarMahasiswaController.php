@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MahasiswaModel;
+use App\TahunAkademik;
 use App\ProdiModel;
 use App\Semester;
 use App\Jenjang;
@@ -19,11 +20,12 @@ class PendaftarMahasiswaController extends Controller
         ];
 
         $mahasiswas= MahasiswaModel::orderBy('created_at','desc')->get();
+        $ta = TahunAkademik::all();
         $prodis = ProdiModel::all();
         $semesters = Semester::all();
         $jenjang = Jenjang::all();
         //dd($mahasiswas);
-        return view('admin.resepsionis.pendaftar_mahasiswa.index', compact('data','mahasiswas','prodis','semesters','jenjang'));
+        return view('admin.resepsionis.pendaftar_mahasiswa.index', compact('data','ta','mahasiswas','prodis','semesters','jenjang'));
     }
 
     public function pendaftarAdd(Request $request)
@@ -31,6 +33,7 @@ class PendaftarMahasiswaController extends Controller
         MahasiswaModel::create([
            //'nim' => $request->nim,
             'nama' => $request->nama,
+            'id_tahun_akademik' => $request->id_tahun_akademik,
             'id_prodi' => $request->id_prodi,
             'id_jenjang' => $request->id_jenjang,
             'id_semester' => 1,

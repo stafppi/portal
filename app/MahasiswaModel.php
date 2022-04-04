@@ -10,6 +10,7 @@ class MahasiswaModel extends Model
     protected $fillable = [
         'nim', 
         'nama', 
+        'id_tahun_akademik',
         'id_jenjang', 
         'id_prodi', 
         'id_semester', 
@@ -26,5 +27,10 @@ class MahasiswaModel extends Model
     public function prodi_model()
     {
         return $this->belongsTo(ProdiModel::class,'id_prodi','id');
+    }
+
+    public function ta()
+    {
+        return $this->belongsTo(TahunAkademik::class,'id_tahun_akademik','id');
     }
 }
