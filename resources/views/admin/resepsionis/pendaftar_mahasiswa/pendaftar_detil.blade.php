@@ -83,9 +83,9 @@
                             <td>{{ $mahasiswa->alamat }}</td>
                         </tr>
                         <tr>
-                            <td>Tgl Dibuat</td>
+                            <td>Tgl Daftar</td>
                             <td align="center"> : </td>
-                            <td>{{ $mahasiswa->created_at }}</td>
+                            <td>{{ $mahasiswa['ta']['tahun_akademik'] }} || {{ $mahasiswa['ta']['semester_ta'] }} || {{ $mahasiswa->created_at }}</td>
                         </tr>
                     </tbody>
                 </table>

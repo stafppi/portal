@@ -26,7 +26,6 @@ class TahunAkademikController extends Controller
         $validatedData = $request->validate([
             'tahun_akademik' => 'required',
             'semester_ta' => 'required',
-            'keterangan' => 'required',
         ]);
 
         if($validatedData){
@@ -72,8 +71,6 @@ class TahunAkademikController extends Controller
         $validatedData = $request->validate([
             'tahun_akademik' => 'required',
             'semester_ta' => 'required',
-            'keterangan' => 'required',
-            'status' => 'required',
         ]);
 
         if($validatedData){

@@ -80,6 +80,7 @@
             <option value="1" <?php echo $matakuliah->sks == '1' ? 'selected': ''; ?> > 1</option>
             <option value="2" <?php echo $matakuliah->sks == '2' ? 'selected': ''; ?> > 2</option>
             <option value="3" <?php echo $matakuliah->sks == '3' ? 'selected': ''; ?> > 3</option>
+            <option value="4" <?php echo $matakuliah->sks == '4' ? 'selected': ''; ?> > 4</option>
 </select>
 </div>
 </div>

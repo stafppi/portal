@@ -44,7 +44,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ ($prefix == '/bak')? 'active' : '' }}">
+            <a href="#" class="nav-link {{ ($prefix == 'admin/bak')? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 BAK
@@ -261,14 +261,14 @@
           </li>
 
           <li class="nav-item">
-            <a href="" class="nav-link {{ ($prefix == '/master-data')? 'active' : '' }}">
+            <a href="" class="nav-link {{ ($prefix == 'admin/master-data')? 'active' : '' }}">
               <i class="nav-icon far fa-edit"></i>
               <p>
                 Master Data
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview {{ ($prefix == '/master-data')? 'active' : '' }}">
+            <ul class="nav nav-treeview {{ ($prefix == 'admin/master-data')? 'active' : '' }}">
               <li class="nav-item">
                 <a href="{{ route('karyawan.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -339,7 +339,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ ($prefix == 'admin/resepsionis')? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Resepsionis
@@ -347,7 +347,7 @@
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview {{ ($prefix == 'admin/resepsionis')? 'active' : '' }}">
               <li class="nav-item">
                 <a href="{{ route('pendaftar.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

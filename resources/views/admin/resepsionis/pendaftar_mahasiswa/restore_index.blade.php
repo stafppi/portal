@@ -24,15 +24,14 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
                         <th>No Telepon/WA</th>
-                        <th>Alamat</th>
-                        <th>E-Mail</th>
+                        <th>Tgl Daftar</th>
                         <th width="100px;">Aksi</th>
                     </tr>
                   </thead>
@@ -45,8 +44,7 @@
                         <td>{{ $mahasiswa->nama }}</td>
                         <td>{{ $mahasiswa->jenis_kelamin }}</td>
                         <td>{{ $mahasiswa->no_telepon }}</td>
-                        <td>{{ $mahasiswa->alamat }}</td>
-                        <td>{{ $mahasiswa->email }}</td>
+                        <td>{{ $mahasiswa['ta']['tahun_akademik'] }} || {{ $mahasiswa['ta']['semester_ta'] }} || {{ $mahasiswa->created_at }}</td>
                         <td>
                           <a title="Lihat Detil" href="{{ route('pendaftar.detil', $mahasiswa->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
                           <a title="Restore" href="{{ route('pendaftar.back', $mahasiswa->id) }}" class="btn btn-sm btn-primary" id="restore"><i class="fa fa-random"></i></a>
