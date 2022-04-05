@@ -9,6 +9,7 @@ use App\DosenModel;
 use App\ProdiModel;
 use App\Semester;
 use App\RuangModel;
+use App\MataKuliahModel;
 
 class JadwalKuliahController extends Controller
 {
@@ -26,7 +27,8 @@ class JadwalKuliahController extends Controller
         $prodis = ProdiModel::all();
         $semesters = Semester::all();
         $ruangs = RuangModel::all();
-        return view('admin.bak.jadwal.index_jadwal', compact('data', 'jadwalKuliah', 'ta', 'dosens', 'prodis', 'semesters', 'ruangs'));
+        $matkuls = MataKuliahModel::all();
+        return view('admin.bak.jadwal.index_jadwal', compact('data', 'jadwalKuliah', 'matkuls', 'ta', 'dosens', 'prodis', 'semesters', 'ruangs'));
     }
 
     public function jadwalKuliahAdd(Request $request)
@@ -35,6 +37,7 @@ class JadwalKuliahController extends Controller
             'id_tahun_akademik' => 'required',
             'id_prodi' => 'required',
             'id_semester' => 'required',
+            'id_matkul' => 'required',
             'id_dosen' => 'required',
             'id_ruang' => 'required',
             'hari' => 'required',
@@ -48,6 +51,7 @@ class JadwalKuliahController extends Controller
             $data->id_tahun_akademik = $request->id_tahun_akademik;
             $data->id_prodi = $request->id_prodi;
             $data->id_semester = $request->id_semester;
+            $data->id_matkul = $request->id_matkul;
             $data->id_dosen = $request->id_dosen;
             $data->id_ruang = $request->id_ruang;
             $data->hari = $request->hari;
@@ -77,7 +81,8 @@ class JadwalKuliahController extends Controller
         $prodis = ProdiModel::all();
         $semesters = Semester::all();
         $ruangs = RuangModel::all();
-        return view('admin.bak.jadwal.edit_jadwal_kuliah', compact('data', 'jadwalKuliah', 'ta', 'dosens', 'prodis', 'semesters', 'ruangs'));
+        $matkuls = MataKuliahModel::all();
+        return view('admin.bak.jadwal.edit_jadwal_kuliah', compact('data', 'jadwalKuliah', 'matkuls', 'ta', 'dosens', 'prodis', 'semesters', 'ruangs'));
         // compact('data', 'jadwalKuliah', 'dosens', 'prodis', 'semesters', 'ruangs')
     }
 
@@ -87,6 +92,7 @@ class JadwalKuliahController extends Controller
             'id_prodi' => 'required',
             'id_semester' => 'required',
             'id_dosen' => 'required',
+            'id_matkul' => 'required',
             'id_ruang' => 'required',
             'hari' => 'required',
             'jam_masuk' => 'required',
@@ -96,6 +102,7 @@ class JadwalKuliahController extends Controller
         $data = JadwalKuliah::find($id);
         $data->id_prodi = $request->id_prodi;
         $data->id_semester = $request->id_semester;
+        $data->id_matkul = $request->id_matkul;
         $data->id_dosen = $request->id_dosen;
         $data->id_ruang = $request->id_ruang;
         $data->hari = $request->hari;
@@ -124,8 +131,9 @@ class JadwalKuliahController extends Controller
         $prodis = ProdiModel::all();
         $semesters = Semester::all();
         $ruangs = RuangModel::all();
+        $matkuls = MataKuliahModel::all();
 
-        return view('admin.bak.jadwal.index_restore', compact('data', 'jadwalKuliah', 'ta', 'dosens', 'prodis', 'semesters', 'ruangs'));
+        return view('admin.bak.jadwal.index_restore', compact('data', 'jadwalKuliah', 'matkuls', 'ta', 'dosens', 'prodis', 'semesters', 'ruangs'));
     }
 
     public function jadwalKuliahSoftDelete($id)

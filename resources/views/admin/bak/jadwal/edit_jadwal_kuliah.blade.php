@@ -46,6 +46,11 @@
                             <td>{{ $jadwalKuliah['SemesterModel']['semester'] }}</td>
                         </tr>
                         <tr>
+                            <td>Matakuliah</td>
+                            <td align="center"> : </td>
+                            <td>{{ $jadwalKuliah['matkulModel']['nama_matakuliah'] }}</td>
+                        </tr>
+                        <tr>
                             <td>Dosen</td>
                             <td align="center"> : </td>
                             <td>{{ $jadwalKuliah['DosenModel']['nama'] }}</td>
@@ -58,7 +63,7 @@
                         <tr>
                             <td>Hari - Jam</td>
                             <td align="center"> : </td>
-                            <td>{{ $jadwalKuliah->hari }} - {{ $jadwalKuliah->jam_masuk }}</td>
+                            <td>{{ $jadwalKuliah->hari }} - {{ $jadwalKuliah->jam_masuk }} s/d {{ $jadwalKuliah->jam_keluar }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,9 +91,17 @@
                       <div class="form-group">
                         <label for="id_semester">Semester</label>
                         <select class="form-control" name="id_semester" id="id_semester">
-                          <option value="Null">-- Pilih Semester --</option>
                           @foreach($semesters as $semester)
                           <option value="{{ $semester->id }}" <?php echo ($jadwalKuliah->id_semester == $semester->id)? 'selected' : ''; ?> > {{ $semester->semester }} </option>
+                          @endforeach
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="id_matkul">Matakuliah</label>
+                        <select class="form-control" name="id_matkul" id="id_matkul">
+                          @foreach($matkuls as $matkul)
+                          <option value="{{ $matkul->id }}" <?php echo ($jadwalKuliah->id_matkul == $matkul->id)? 'selected' : ''; ?> > {{ $matkul->nama_matakuliah }} </option>
                           @endforeach
                         </select>
                       </div>

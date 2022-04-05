@@ -33,6 +33,7 @@
                         <th>Tahun Akademik</th>
                         <th>Prodi</th>
                         <th>Semester</th>
+                        <th>Matkul</th>
                         <th>Dosen</th>
                         <th>Ruang</th>
                         <th>Hari - Jam</th>
@@ -49,6 +50,7 @@
                         <td>{{ $jadwal['thn_akademik']['tahun_akademik'] }} - {{ $jadwal['thn_akademik']['semester_ta'] }}</td>
                         <td>{{ $jadwal['jadwal_kuliah']['nama_prodi'] }}</td>
                         <td>{{ $jadwal['SemesterModel']['semester'] }}</td>
+                        <td>{{ $jadwal['matkulModel']['nama_matakuliah'] }}</td>
                         <td>{{ $jadwal['DosenModel']['nama'] }}</td>
                         <td>{{ $jadwal['RuangModel']['nama_ruang'] }}</td>
                         <td>{{ $jadwal->hari }} - {{ $jadwal->jam_masuk }}</td>
@@ -90,7 +92,7 @@
                     <div class="card-body">
 
                       <div class="form-group">
-                        <label for="id_tahun_akademik">Program Studi</label>
+                        <label for="id_tahun_akademik">Tahun Akademik</label>
                         <select class="form-control" name="id_tahun_akademik" id="id_tahun_akademik">
                           <option value="Null">-- Pilih Tahun Akademik --</option>
                           @foreach($ta as $row)
@@ -105,6 +107,16 @@
                           <option value="Null">-- Pilih Prodi --</option>
                           @foreach($prodis as $prodi)
                           <option value="{{ $prodi->id }}"> {{ $prodi->nama_prodi }} </option>
+                          @endforeach
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="id_matkul">Matakuliah</label>
+                        <select class="form-control" name="id_matkul" id="id_matkul">
+                          <option value="Null">-- Pilih Matakuliah --</option>
+                          @foreach($matkuls as $matkul)
+                          <option value="{{ $matkul->id }}"> {{ $matkul->nama_matakuliah }} </option>
                           @endforeach
                         </select>
                       </div>

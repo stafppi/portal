@@ -31,6 +31,7 @@
                         <th>Tahun Akademik</th>
                         <th>Prodi</th>
                         <th>Semester</th>
+                        <th>Matkul</th>
                         <th>Dosen</th>
                         <th>Ruang</th>
                         <th>Hari - Jam</th>
@@ -47,6 +48,7 @@
                         <td>{{ $jadwal['thn_akademik']['tahun_akademik'] }} - {{ $jadwal['thn_akademik']['semester_ta'] }}</td>
                         <td>{{ $jadwal['jadwal_kuliah']['nama_prodi'] }}</td>
                         <td>{{ $jadwal['SemesterModel']['semester'] }}</td>
+                        <td>{{ $jadwal['matkulModel']['nama_matakuliah'] }}</td>
                         <td>{{ $jadwal['DosenModel']['nama'] }}</td>
                         <td>{{ $jadwal['RuangModel']['nama_ruang'] }}</td>
                         <td>{{ $jadwal->hari }} - {{ $jadwal->jam_masuk }}</td>

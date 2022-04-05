@@ -45,6 +45,11 @@ class JadwalKuliah extends Model
         return $this->belongsTo(RuangModel::class, 'id_ruang', 'id');
     }
 
+    public function matkulModel()
+    {
+        return $this->belongsTo(MataKuliahModel::class, 'id_matkul', 'id');
+    }
+
 
 
     

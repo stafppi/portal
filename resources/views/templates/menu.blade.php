@@ -44,6 +44,85 @@
           </li>
 
           <li class="nav-item">
+            <a href="" class="nav-link {{ ($prefix == 'admin/master-data')? 'active' : '' }}">
+              <i class="nav-icon far fa-edit"></i>
+              <p>
+                Master Data
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview {{ ($prefix == 'admin/master-data')? 'active' : '' }}">
+              <li class="nav-item">
+                <a href="{{ route('karyawan.view') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Karyawan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('mahasiswa.view') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Dosen
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('dosen.view') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Dosen</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('jabatan.dosen.view') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Jabatan</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/dosen-pembimbing" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Dosen Pembimbing</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('ruang.view') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ruang</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('matakuliah.view') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Matakuliah</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('prodi.view') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Prodi</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="starter.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Data Web</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item">
             <a href="#" class="nav-link {{ ($prefix == 'admin/bak')? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -260,84 +339,7 @@
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="" class="nav-link {{ ($prefix == 'admin/master-data')? 'active' : '' }}">
-              <i class="nav-icon far fa-edit"></i>
-              <p>
-                Master Data
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview {{ ($prefix == 'admin/master-data')? 'active' : '' }}">
-              <li class="nav-item">
-                <a href="{{ route('karyawan.view') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Karyawan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('mahasiswa.view') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mahasiswa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Dosen
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('dosen.view') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Dosen</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('jabatan.dosen.view') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Jabatan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/dosen-pembimbing" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Dosen Pembimbing</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('ruang.view') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ruang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('matakuliah.view') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Matakuliah</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('prodi.view') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Prodi</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="starter.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Master Data Web</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
+          
           <li class="nav-item">
             <a href="#" class="nav-link {{ ($prefix == 'admin/resepsionis')? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
